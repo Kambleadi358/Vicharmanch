@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<url>
+<loc>https://vicharmanch.vercel.app/</loc>
+</url>
+
+<url>
+<loc>https://vicharmanch.vercel.app/about</loc>
+</url>
+
+<url>
+<loc>https://vicharmanch.vercel.app/ideology</loc>
+</url>
+
+<url>
+<loc>https://vicharmanch.vercel.app/programs</loc>
+</url>
+
+<url>
+<loc>https://vicharmanch.vercel.app/quiz</loc>
+</url>
+
+<url>
+<loc>https://vicharmanch.vercel.app/accounts</loc>
+</url>
+
+</urlset>
