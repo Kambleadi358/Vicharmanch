@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Instagram, Shield } from "lucide-react";
+import { Menu, X, Instagram, Shield, Bot } from "lucide-react";
 import logo from "@/assets/vicharmanch-logo.jpeg";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -50,11 +50,10 @@ const Header = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative px-4 py-2 text-sm font-medium transition-colors ${
-                  location.pathname === link.path
-                    ? "text-accent"
-                    : "text-primary-foreground/80 hover:text-primary-foreground"
-                }`}
+                className={`relative px-4 py-2 text-sm font-medium transition-colors ${location.pathname === link.path
+                  ? "text-accent"
+                  : "text-primary-foreground/80 hover:text-primary-foreground"
+                  }`}
               >
                 {link.label}
                 {location.pathname === link.path && (
@@ -70,6 +69,15 @@ const Header = () => {
 
           {/* Social & Admin & Mobile Toggle */}
           <div className="flex items-center gap-4">
+            <a
+              href="https://bhimbot.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-foreground/80 hover:text-accent transition-colors"
+              title="BhimBot"
+            >
+              <Bot size={22} className="text-accent animate-pulse" />
+            </a>
             <a
               href="https://instagram.com/dr.ambedkar_vicharmanch"
               target="_blank"
@@ -115,16 +123,30 @@ const Header = () => {
                   <Link
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className={`block px-6 py-3 text-base ${
-                      location.pathname === link.path
-                        ? "text-accent bg-primary-foreground/5"
-                        : "text-primary-foreground/80"
-                    }`}
+                    className={`block px-6 py-3 text-base ${location.pathname === link.path
+                      ? "text-accent bg-primary-foreground/5"
+                      : "text-primary-foreground/80"
+                      }`}
                   >
                     {link.label}
                   </Link>
                 </motion.div>
               ))}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.1 }}
+              >
+                <a
+                  href="https://bhimbot.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-6 py-3 text-accent font-medium bg-accent/10 border-l-4 border-accent"
+                >
+                  <Bot size={20} />
+                  <span>BhimBot (AI सहाय्यक)</span>
+                </a>
+              </motion.div>
             </nav>
           </motion.div>
         )}
