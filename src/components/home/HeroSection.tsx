@@ -91,23 +91,19 @@ const HeroSection = () => {
               transition={{ delay: 0.6 }}
               className="flex flex-wrap gap-4 justify-center lg:justify-start"
             >
-              <Link to="/programs" className="btn-hero flex items-center gap-2">
-                <Calendar size={20} />
-                कार्यक्रम पहा
-              </Link>
               <a
                 href="https://bhimbot.vercel.app"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-hero bg-primary border-2 border-accent hover:bg-accent/10 flex items-center gap-2"
-                title="प्रज्ञा (AI सहाय्यक)"
+                className="btn-hero flex items-center gap-2"
+                title="प्रज्ञा AI"
               >
-                <Bot size={20} className="text-accent animate-pulse" />
-                प्रज्ञा (AI सहाय्यक)
+                <Bot size={20} className="animate-pulse" />
+                प्रज्ञा AI
               </a>
-              <Link to="/quiz" className="btn-outline-hero flex items-center gap-2">
-                <BookOpen size={20} />
-                प्रश्नमंजुषा
+              <Link to="/programs" className="btn-outline-hero flex items-center gap-2">
+                <Calendar size={20} />
+                कार्यक्रम पहा
               </Link>
               <Link to="/accounts" className="btn-outline-hero flex items-center gap-2">
                 <Wallet size={20} />
