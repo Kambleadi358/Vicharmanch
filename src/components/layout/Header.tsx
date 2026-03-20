@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Instagram, Shield, Bot } from "lucide-react";
+import { Menu, X, Instagram, Shield, Bot, ClipboardCheck } from "lucide-react";
 import logo from "@/assets/vicharmanch-logo.jpeg";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -17,7 +17,7 @@ const navLinks = [
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const { isAdmin, user } = useAuth();
+  const { isAdmin } = useAuth();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-md border-b border-primary-foreground/10">
@@ -83,15 +83,28 @@ const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary-foreground/80 hover:text-accent transition-colors"
+              title="Instagram"
             >
               <Instagram size={20} />
+            </a>
+            <a
+              href="https://eval_vms.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-foreground/80 hover:text-accent transition-colors"
+              title="Evaluation Engine (स्पर्धा मूल्यांकन)"
+            >
+              <ClipboardCheck size={22} />
             </a>
             <Link
               to={isAdmin ? "/admin" : "/admin-login"}
               className="text-primary-foreground/80 hover:text-accent transition-colors"
               title={isAdmin ? "Admin Dashboard" : "Admin Login"}
             >
-              <Shield size={20} />
+              <span className="sr-only">Admin</span>
+              <div className="p-1 hover:bg-white/10 rounded-full transition-colors">
+                <Shield size={20} />
+              </div>
             </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -132,16 +145,33 @@ const Header = () => {
                   </Link>
                 </motion.div>
               ))}
+
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navLinks.length * 0.1 }}
               >
                 <a
+                  href="https://eval_vms.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-6 py-3 text-primary-foreground/80 hover:text-accent transition-colors"
+                >
+                  <ClipboardCheck size={20} />
+                  <span>मूल्यांकन इंजिन (Evaluation Engine)</span>
+                </a>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: (navLinks.length + 1) * 0.1 }}
+              >
+                <a
                   href="https://bhimbot.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-6 py-3 text-accent font-medium bg-accent/10 border-l-4 border-accent"
+                  className="flex items-center gap-3 px-6 py-3 text-primary-foreground/80 hover:text-accent transition-colors"
                 >
                   <Bot size={20} />
                   <span>BhimBot (AI सहाय्यक)</span>

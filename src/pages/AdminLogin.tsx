@@ -107,7 +107,7 @@ const AdminLogin = () => {
                 </div>
                 <div className="flex justify-end">
                   <Link
-                    to="/admin-forgot-password"
+                    to="/forgot-password"
                     className="text-sm text-primary hover:underline"
                   >
                     पासवर्ड विसरलात?

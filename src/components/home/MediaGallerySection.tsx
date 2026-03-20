@@ -47,26 +47,19 @@ const MediaGallerySection = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto"
         >
-          {/* Embedded Google Drive Preview */}
-          <div className="rounded-2xl overflow-hidden border-2 border-accent/20 shadow-xl bg-card">
-            <iframe
-              src={galleryLink.replace("/drive/folders/", "/embeddedfolderview?id=").split("?")[0].replace("/embeddedfolderview?id=", "/embeddedfolderview?id=") + "#grid"}
-              className="w-full h-[400px] sm:h-[500px]"
-              title="मीडिया गॅलरी"
-              style={{ border: "none" }}
-            />
-          </div>
-
-          <div className="text-center mt-6">
+          <div className="text-center bg-card p-8 rounded-2xl border-2 border-accent/20 shadow-lg">
+            <p className="text-muted-foreground mb-8 text-lg">
+              आमची संपूर्ण फोटो आणि व्हिडिओ गॅलरी पाहण्यासाठी खालील बटणावर क्लिक करा.
+            </p>
             <a href={galleryLink} target="_blank" rel="noopener noreferrer">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-semibold rounded-full shadow-lg hover:shadow-xl transition-shadow"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-accent-foreground font-bold rounded-full shadow-lg hover:shadow-xl transition-all text-lg"
               >
-                <Images size={20} />
-                संपूर्ण गॅलरी पहा
-                <ExternalLink size={16} />
+                <Images size={24} />
+                संपूर्ण गॅलरी उघडा
+                <ExternalLink size={20} />
               </motion.button>
             </a>
           </div>
