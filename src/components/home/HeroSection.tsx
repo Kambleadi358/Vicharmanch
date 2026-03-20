@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { BookOpen, Calendar, Wallet } from "lucide-react";
+import { BookOpen, Calendar, Wallet, Bot } from "lucide-react";
 import logo from "@/assets/vicharmanch-logo.jpeg";
 
 const HeroSection = () => {
@@ -95,6 +95,16 @@ const HeroSection = () => {
                 <Calendar size={20} />
                 कार्यक्रम पहा
               </Link>
+              <a
+                href="https://bhimbot.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-hero bg-primary border-2 border-accent hover:bg-accent/10 flex items-center gap-2"
+                title="प्रज्ञा (AI सहाय्यक)"
+              >
+                <Bot size={20} className="text-accent animate-pulse" />
+                प्रज्ञा (AI सहाय्यक)
+              </a>
               <Link to="/quiz" className="btn-outline-hero flex items-center gap-2">
                 <BookOpen size={20} />
                 प्रश्नमंजुषा

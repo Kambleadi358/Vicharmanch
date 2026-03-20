@@ -70,15 +70,6 @@ const Header = () => {
           {/* Social & Admin & Mobile Toggle */}
           <div className="flex items-center gap-4">
             <a
-              href="https://bhimbot.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary-foreground/80 hover:text-accent transition-colors"
-              title="BhimBot"
-            >
-              <Bot size={22} className="text-accent animate-pulse" />
-            </a>
-            <a
               href="https://instagram.com/dr.ambedkar_vicharmanch"
               target="_blank"
               rel="noopener noreferrer"
@@ -162,21 +153,6 @@ const Header = () => {
                 </a>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: (navLinks.length + 1) * 0.1 }}
-              >
-                <a
-                  href="https://bhimbot.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-6 py-3 text-primary-foreground/80 hover:text-accent transition-colors"
-                >
-                  <Bot size={20} />
-                  <span>BhimBot (AI सहाय्यक)</span>
-                </a>
-              </motion.div>
             </nav>
           </motion.div>
         )}
