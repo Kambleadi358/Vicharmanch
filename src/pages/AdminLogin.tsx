@@ -105,20 +105,28 @@ const AdminLogin = () => {
                     required
                   />
                 </div>
+                <div className="flex justify-end">
+                  <Link
+                    to="/admin-forgot-password"
+                    className="text-sm text-primary hover:underline"
+                  >
+                    पासवर्ड विसरलात?
+                  </Link>
+                </div>
               </div>
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "लॉगिन होत आहे..." : "लॉगिन करा"}
-            </Button>
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? "लॉगिन होत आहे..." : "लॉगिन करा"}
+              </Button>
 
-            <p className="text-center text-sm text-muted-foreground">
-              खाते नाही?{" "}
-              <Link to="/admin-signup" className="text-primary hover:underline">
-                साइन अप करा
-              </Link>
-            </p>
-          </form>
-        </CardContent>
-      </Card>
+              <p className="text-center text-sm text-muted-foreground">
+                खाते नाही?{" "}
+                <Link to="/admin-signup" className="text-primary hover:underline">
+                  साइन अप करा
+                </Link>
+              </p>
+            </form>
+          </CardContent>
+        </Card>
       </motion.div>
     </div>
   );

@@ -237,8 +237,8 @@ const AdminSettings = () => {
                 सर्व विद्यार्थ्यांचे क्विझ प्रतिसाद आणि उत्तरे हटवा
               </p>
             </div>
-            <Button 
-              variant="destructive" 
+            <Button
+              variant="destructive"
               onClick={handleResetAllQuizResponses}
               disabled={isResettingQuiz}
             >
