@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { BookOpen, Calendar, Wallet } from "lucide-react";
+import { BookOpen, Calendar, Wallet, Download } from "lucide-react";
 import logo from "@/assets/vicharmanch-logo.jpeg";
 
 const HeroSection = () => {
@@ -91,9 +91,16 @@ const HeroSection = () => {
               transition={{ delay: 0.6 }}
               className="flex flex-wrap gap-4 justify-center lg:justify-start"
             >
-              <div className="btn-hero flex items-center gap-2 cursor-default select-none shadow-xl shadow-accent/20">
-                <span>...</span>
-              </div>
+              <a
+                href="https://github.com/Kambleadi358/Vicharmanch/releases/download/v1.0/vms.apk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-hero flex items-center gap-2 shadow-xl shadow-accent/20"
+                title="अधिकृत अ‍ॅप डाउनलोड करा"
+              >
+                <Download size={20} className="animate-bounce" />
+                अधिकृत अ‍ॅप
+              </a>
               <Link to="/programs" className="btn-outline-hero flex items-center gap-2">
                 <Calendar size={20} />
                 कार्यक्रम पहा

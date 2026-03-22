@@ -79,7 +79,7 @@ const Header = () => {
               <Instagram size={20} />
             </a>
             <a
-              href="https://eval_vms.vercel.app"
+              href="https://vmseval.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary-foreground/80 hover:text-accent transition-colors"
@@ -143,7 +143,7 @@ const Header = () => {
                 transition={{ delay: navLinks.length * 0.1 }}
               >
                 <a
-                  href="https://eval_vms.vercel.app"
+                  href="https://vmseval.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 px-6 py-3 text-primary-foreground/80 hover:text-accent transition-colors"
