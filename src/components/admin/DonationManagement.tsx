@@ -794,6 +794,24 @@ const DonationManagement = () => {
         </Card>
       </div>
 
+
+
+
+             <p className="text-sm text-muted-foreground">बाकी रक्कम</p>
+                <p className="text-xl font-bold">₹{(totalAssigned.toLocaleString()-totalPaid.toLocaleString())}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="pt-6">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-green-500" />
+              <div>
+
+
+
+
       {/* Visibility Toggle & Report Download */}
       <Card className={yearlyAccount?.is_visible ? "border-green-500 bg-green-50 dark:bg-green-900/20" : "border-orange-500 bg-orange-50 dark:bg-orange-900/20"}>
         <CardContent className="py-4">
