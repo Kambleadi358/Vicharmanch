@@ -23,7 +23,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
-              अध्यक्षविहीन, विचारकेंद्रित, पारदर्शक चळवळ
+              स्वतंत्रता, समता, बंधुता, न्याय
             </p>
           </div>
 

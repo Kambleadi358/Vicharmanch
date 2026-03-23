@@ -49,7 +49,7 @@ const MediaGallerySection = () => {
         >
           <div className="text-center bg-card p-8 rounded-2xl border-2 border-accent/20 shadow-lg">
             <p className="text-muted-foreground mb-8 text-lg">
-              आमची संपूर्ण फोटो आणि व्हिडिओ गॅलरी पाहण्यासाठी खालील बटणावर क्लिक करा.
+              आमच्या संपूर्ण फोटो आणि व्हिडिओ गॅलरी पाहण्यासाठी खालील बटणावर क्लिक करा.
             </p>
             <a href={galleryLink} target="_blank" rel="noopener noreferrer">
               <motion.button

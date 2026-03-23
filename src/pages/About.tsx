@@ -1,23 +1,28 @@
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
-import { MapPin, Mail, Instagram, Users, Shield, Eye } from "lucide-react";
+import { MapPin, Mail, Instagram, Users, Shield, Scale, Sparkles } from "lucide-react";
 import ambedkarPortrait from "@/assets/ambedkar-portrait.png";
 
 const values = [
   {
-    icon: Users,
-    title: "अध्यक्षविहीन रचना",
-    description: "कोणताही एकमेव नेता नाही. निर्णय सामूहिक घेतले जातात. व्यक्तिपूजा नाही.",
-  },
-  {
     icon: Shield,
-    title: "विचारप्रधान कार्य",
-    description: "आंबेडकरवादी विचारांचे प्रसार व संवर्धन हाच आमचा मूळ उद्देश.",
+    title: "स्वतंत्रता",
+    description: "प्रत्येक व्यक्तीला स्वतःचे विचार मांडण्याचे आणि जगण्याचे पूर्ण स्वातंत्र्य.",
   },
   {
-    icon: Eye,
-    title: "पारदर्शक व्यवहार",
-    description: "संपूर्ण खाते माहिती सार्वजनिक. प्रत्येक रुपयाचा हिशोब.",
+    icon: Scale,
+    title: "समता",
+    description: "जात, धर्म, वंश या पलीकडे जाऊन सर्वांना समान वागणूक आणि संधी.",
+  },
+  {
+    icon: Users,
+    title: "बंधुता",
+    description: "मानवतेच्या नात्याने एकमेकांप्रती आदर, प्रेम आणि एकात्मता.",
+  },
+  {
+    icon: Sparkles,
+    title: "न्याय",
+    description: "सामाजिक, आर्थिक आणि राजकीय क्षेत्रांत सर्वांना न्याय मिळवून देणे.",
   },
 ];
 
@@ -41,7 +46,7 @@ const About = () => {
               आमच्याबद्दल
             </h1>
             <p className="text-xl text-primary-foreground/70 max-w-3xl mx-auto">
-              अध्यक्षविहीन, विचारकेंद्रित, पारदर्शक चळवळ
+              स्वतंत्रता, समता, बंधुता, न्याय
             </p>
           </motion.div>
         </div>
@@ -67,10 +72,10 @@ const About = () => {
                   decoding="async"
                   fetchPriority="high"
                 />
-                <div className="absolute -bottom-4 -right-4 bg-accent text-accent-foreground px-4 py-3 rounded-lg text-sm leading-relaxed text-center">
-                  <div>बुद्धं शरणं गच्छामि</div>
-                  <div>धम्मं शरणं गच्छामि</div>
-                  <div>संघं शरणं गच्छामि</div>
+                <div className="absolute -bottom-4 -right-4 bg-accent text-accent-foreground px-4 py-3 rounded-lg text-sm leading-relaxed text-center font-bold">
+                  <div>भारतीय</div>
+                  <div>संविधानाचे</div>
+                  <div>शिल्पकार</div>
                 </div>
               </div>
             </motion.div>
@@ -93,13 +98,13 @@ const About = () => {
               </div>
 
               <p className="text-muted-foreground text-lg leading-relaxed">
-                भारतरत्न डॉ. बाबासाहेब आंबेडकर विचारमंच, लातूर ही एक विचारकेंद्रित 
-                सामाजिक चळवळ आहे. आम्ही मुख्यतः आंबेडकर जयंतीच्या निमित्ताने 
+                भारतरत्न डॉ. बाबासाहेब आंबेडकर विचारमंच बौद्ध नगर, लातूर ही एक विचारकेंद्रित
+                सामाजिक चळवळ आहे. आम्ही मुख्यतः आंबेडकर जयंतीच्या निमित्ताने
                 विविध वैचारिक, बौद्धिक, सामाजिक व सांस्कृतिक कार्यक्रमांचे आयोजन करतो.
               </p>
 
               <p className="text-muted-foreground leading-relaxed">
-                आमची संघटना ही व्यक्तिकेंद्रित नसून विचारकेंद्रित आहे. येथे कोणताही 
+                आमची संघटना ही व्यक्तिकेंद्रित नसून विचारकेंद्रित आहे. येथे कोणताही
                 अध्यक्ष नाही, कोणताही एकमेव नेता नाही. सर्व निर्णय सामूहिकपणे घेतले जातात.
               </p>
 
@@ -118,9 +123,9 @@ const About = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Instagram className="text-accent" size={20} />
-                  <a 
-                    href="https://instagram.com/dr.ambedkar_vicharmanch" 
-                    target="_blank" 
+                  <a
+                    href="https://instagram.com/dr.ambedkar_vicharmanch"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-foreground hover:text-accent transition-colors"
                   >
@@ -151,7 +156,7 @@ const About = () => {
             <div className="decorative-line mt-4" />
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <motion.div
                 key={value.title}

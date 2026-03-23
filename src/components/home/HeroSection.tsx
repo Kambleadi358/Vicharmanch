@@ -51,7 +51,7 @@ const HeroSection = () => {
                 transition={{ delay: 0.2 }}
                 className="inline-block px-4 py-2 bg-accent/20 rounded-full text-accent text-sm font-medium"
               >
-                अध्यक्षविहीन • विचारकेंद्रित • पारदर्शक
+                स्वतंत्रता • समता • बंधुता • न्याय
               </motion.div>
 
               <motion.h1
