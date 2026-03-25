@@ -12,6 +12,7 @@ const navLinks = [
   { path: "/programs", label: "कार्यक्रम" },
   { path: "/quiz", label: "प्रश्नमंजुषा" },
   { path: "/accounts", label: "खाते माहिती" },
+  { path: "https://vmseval.vercel.app/report", label: "वार्षिक अहवाल", isExternal: true },
 ];
 
 const Header = () => {
@@ -47,23 +48,35 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`relative px-4 py-2 text-sm font-medium transition-colors ${location.pathname === link.path
-                  ? "text-accent"
-                  : "text-primary-foreground/80 hover:text-primary-foreground"
-                  }`}
-              >
-                {link.label}
-                {location.pathname === link.path && (
-                  <motion.div
-                    layoutId="activeNav"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-              </Link>
+              link.isExternal ? (
+                <a
+                  key={link.path}
+                  href={link.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 text-sm font-medium text-primary-foreground/80 hover:text-accent transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`relative px-4 py-2 text-sm font-medium transition-colors ${location.pathname === link.path
+                    ? "text-accent"
+                    : "text-primary-foreground/80 hover:text-primary-foreground"
+                    }`}
+                >
+                  {link.label}
+                  {location.pathname === link.path && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              )
             ))}
           </nav>
 
@@ -124,16 +137,27 @@ const Header = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Link
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`block px-6 py-3 text-base ${location.pathname === link.path
-                      ? "text-accent bg-primary-foreground/5"
-                      : "text-primary-foreground/80"
-                      }`}
-                  >
-                    {link.label}
-                  </Link>
+                  {link.isExternal ? (
+                    <a
+                      href={link.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block px-6 py-3 text-base text-primary-foreground/80 hover:text-accent"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.path}
+                      onClick={() => setIsOpen(false)}
+                      className={`block px-6 py-3 text-base ${location.pathname === link.path
+                        ? "text-accent bg-primary-foreground/5"
+                        : "text-primary-foreground/80"
+                        }`}
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </motion.div>
               ))}
 
