@@ -6,7 +6,7 @@ import ambedkarPortrait from "@/assets/ambedkar-portrait.png";
 const values = [
   {
     icon: Shield,
-    title: "स्वतंत्रता",
+    title: "स्वातंत्र",
     description: "प्रत्येक व्यक्तीला स्वतःचे विचार मांडण्याचे आणि जगण्याचे पूर्ण स्वातंत्र्य.",
   },
   {
