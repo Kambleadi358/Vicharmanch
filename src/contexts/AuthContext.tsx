@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const checkAdminRole = async (userId: string) => {
     try {
+      console.log("Checking admin role for user:", userId);
       const { data, error } = await supabase
         .from("user_roles")
         .select("role")
@@ -39,11 +40,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       if (error) {
         console.error("Error checking admin role:", error);
+        // Special case: if error is because of RLS, the user cannot see their own role record
+        if (error.code === "42501") {
+          console.error("DEBUG: RLS permission denied while checking admin role. Table 'user_roles' needs SELECT policy for users.");
+        }
         return false;
       }
+      
+      console.log("Admin role result:", !!data);
       return !!data;
     } catch (error) {
-      console.error("Error checking admin role:", error);
+      console.error("Critical error checking admin role:", error);
       return false;
     }
   };

@@ -27,20 +27,28 @@ const AdminLogin = () => {
       if (error) {
         toast({
           title: "लॉगिन त्रुटी",
-          description: error.message,
+          description: error.message || "चुकीचा ईमेल किंवा पासवर्ड",
           variant: "destructive",
         });
       } else {
-        toast({
-          title: "यशस्वी लॉगिन",
-          description: "Admin Dashboard मध्ये स्वागत आहे!",
-        });
-        navigate("/admin");
+        // Successful sign-in, now wait for isAdmin status to update from AuthContext
+        // We'll give it a tiny delay to ensure the context updates
+        setTimeout(async () => {
+          // Note: we can't easily access the latest isAdmin here because it's from the context,
+          // but if we redirected to /admin and they are not admin, they'll get kicked back.
+          // For now, simple success toast.
+          toast({
+            title: "यशस्वी लॉगिन",
+            description: "Admin Dashboard मध्ये स्वागत आहे!",
+          });
+          navigate("/admin");
+        }, 500);
       }
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Login catch error:", error);
       toast({
         title: "त्रुटी",
-        description: "काहीतरी चुकले. कृपया पुन्हा प्रयत्न करा.",
+        description: error.message || "काहीतरी चुकले. कृपया पुन्हा प्रयत्न करा.",
         variant: "destructive",
       });
     } finally {

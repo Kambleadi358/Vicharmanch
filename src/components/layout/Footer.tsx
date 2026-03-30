@@ -35,15 +35,26 @@ const Footer = () => {
                 { path: "/about", label: "आमच्याबद्दल" },
                 { path: "/ideology", label: "विचारधारा" },
                 { path: "/programs", label: "कार्यक्रम" },
-                { path: "/quiz", label: "प्रश्नमंजुषा" },
+                { path: "https://quiz-three-omega-14.vercel.app/", label: "प्रश्नमंजुषा", isExternal: true },
               ].map((link) => (
                 <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className="text-primary-foreground/70 hover:text-accent transition-colors text-sm"
-                  >
-                    {link.label}
-                  </Link>
+                  {link.isExternal ? (
+                    <a
+                      href={link.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary-foreground/70 hover:text-accent transition-colors text-sm"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.path}
+                      className="text-primary-foreground/70 hover:text-accent transition-colors text-sm"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

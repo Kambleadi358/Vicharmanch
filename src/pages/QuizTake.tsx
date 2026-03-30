@@ -56,7 +56,7 @@ const QuizTake = () => {
           description: "हा क्विझ सध्या सक्रिय नाही.",
           variant: "destructive",
         });
-        navigate("/quiz");
+        window.location.href = "https://quiz-three-omega-14.vercel.app/";
         return;
       }
 
@@ -81,17 +81,18 @@ const QuizTake = () => {
       return;
     }
 
-    // Check if this participant has already taken the quiz
+    // Check if this participant has already taken the quiz (case-insensitive)
     const { data: existingResponse, error: checkError } = await supabase
       .from("quiz_responses")
-      .select("id, submitted_at")
-      .eq("participant_name", trimmedName)
+      .select("id, submitted_at, score")
+      .ilike("participant_name", trimmedName)
       .limit(1);
 
     if (checkError) {
+      console.error("Duplicate Check Error:", checkError);
       toast({
         title: "त्रुटी",
-        description: "तपासणी करताना त्रुटी आली",
+        description: "माहिती तपासताना त्रुटी आली. कृपया इंटरनेट तपासा.",
         variant: "destructive",
       });
       return;
@@ -100,21 +101,31 @@ const QuizTake = () => {
     if (existingResponse && existingResponse.length > 0) {
       toast({
         title: "क्विझ आधीच दिला आहे",
-        description: `"${trimmedName}" या नावाने आधीच क्विझ दिला आहे. एकाच नावाने पुन्हा क्विझ देता येत नाही.`,
+        description: `"${trimmedName}" या नावाने आधीच क्विझ देण्यात आला आहे. तांत्रिक मदतीसाठी संपर्क साधा.`,
         variant: "destructive",
       });
       return;
     }
 
-    // Fetch all questions regardless of category
+    // Fetch all questions with error logging
     const { data, error } = await supabase
       .from("quiz_questions")
       .select("*");
 
-    if (error || !data || data.length === 0) {
+    if (error) {
+      console.error("Fetch Questions Error:", error);
       toast({
-        title: "त्रुटी",
-        description: "प्रश्न लोड करण्यात त्रुटी किंवा प्रश्न उपलब्ध नाहीत",
+        title: "प्रश्न लोड होऊ शकले नाहीत",
+        description: "त्रुटी तपशील: " + (error.message || "Unknown error"),
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      toast({
+        title: "प्रश्न उपलब्ध नाहीत",
+        description: "यावेळी कोणतीही प्रश्नमंजुषा उपलब्ध नाही.",
         variant: "destructive",
       });
       return;
@@ -124,57 +135,98 @@ const QuizTake = () => {
     const shuffled = [...data].sort(() => Math.random() - 0.5);
     setQuestions(shuffled);
     setHasStarted(true);
+    toast({
+      title: "क्विझ सुरू झाला!",
+      description: "शुभेच्छा!",
+    });
   };
 
   // Submit quiz
   const submitQuiz = useCallback(async () => {
     if (submittedRef.current || isSubmitting) return;
-    submittedRef.current = true;
-    setIsSubmitting(true);
-
-    // Calculate score
-    let correctCount = 0;
-    questions.forEach((q) => {
-      if (answers[q.id] === q.correct_answer) {
-        correctCount++;
-      }
-    });
-
-    // Insert main response first
-    const { data: responseData, error } = await supabase.from("quiz_responses").insert([
-      {
-        participant_name: participantName,
-        category: "general",
-        score: correctCount,
-        total_questions: questions.length,
-        tab_switches: tabSwitches,
-      },
-    ]).select("id").single();
-
-    if (error || !responseData) {
+    
+    // Final check for empty name
+    if (!participantName.trim()) {
       toast({
         title: "त्रुटी",
-        description: "प्रतिसाद सबमिट करण्यात त्रुटी",
+        description: "कृपया तुमचे नाव तपासा",
         variant: "destructive",
       });
-      submittedRef.current = false;
-      setIsSubmitting(false);
       return;
     }
 
-    // Insert individual answers
-    const answerRecords = questions.map((q) => ({
-      response_id: responseData.id,
-      question_id: q.id,
-      selected_answer: answers[q.id] || "",
-      is_correct: answers[q.id] === q.correct_answer,
-    }));
+    submittedRef.current = true;
+    setIsSubmitting(true);
 
-    await supabase.from("quiz_answers").insert(answerRecords);
+    try {
+      // Calculate score
+      let correctCount = 0;
+      const formattedAnswers = questions.map((q) => {
+        const isCorrect = answers[q.id] === q.correct_answer;
+        if (isCorrect) correctCount++;
+        return {
+          question_id: q.id,
+          selected_answer: answers[q.id] || "",
+          is_correct: isCorrect,
+        };
+      });
 
-    setScore(correctCount);
-    setIsComplete(true);
-    setIsSubmitting(false);
+      // We'll try a two-step insert first, but with better error handling
+      // In a real production system, use the RPC 'submit_quiz' for atomicity
+      const { data: responseData, error: responseError } = await supabase
+        .from("quiz_responses")
+        .insert([
+          {
+            participant_name: participantName.trim(),
+            category: "general",
+            score: correctCount,
+            total_questions: questions.length,
+            tab_switches: tabSwitches,
+          },
+        ])
+        .select("id")
+        .single();
+
+      if (responseError) {
+        console.error("Submission Error (Response):", responseError);
+        throw new Error(responseError.message || "प्रतिसाद सबमिट करण्यात त्रुटी");
+      }
+
+      if (!responseData) {
+        throw new Error("कोणताही प्रतिसाद आयडी प्राप्त झाला नाही");
+      }
+
+      // Insert individual answers
+      const answerRecords = formattedAnswers.map((ans) => ({
+        ...ans,
+        response_id: responseData.id,
+      }));
+
+      const { error: answersError } = await supabase
+        .from("quiz_answers")
+        .insert(answerRecords);
+
+      if (answersError) {
+        console.error("Submission Error (Answers):", answersError);
+        // Note: Even if answers fail, we have the score in the response record
+      }
+
+      setScore(correctCount);
+      setIsComplete(true);
+      toast({
+        title: "यशस्वी",
+        description: "तुमचा क्विझ यशस्वीरित्या सबमिट झाला आहे!",
+      });
+    } catch (err: any) {
+      console.error("Quiz Submission Error:", err);
+      submittedRef.current = false;
+      setIsSubmitting(false);
+      toast({
+        title: "सबमिट करण्यात अडचण",
+        description: err.message || "कृपया इंटरनेट कनेक्शन तपासा आणि पुन्हा प्रयत्न करा.",
+        variant: "destructive",
+      });
+    }
   }, [answers, participantName, questions, tabSwitches, toast]);
 
   // Timer countdown
@@ -315,7 +367,7 @@ const QuizTake = () => {
                   </div>
                 )}
 
-                <Button onClick={() => navigate("/quiz")} className="w-full">
+                <Button onClick={() => window.location.href = "https://quiz-three-omega-14.vercel.app/"} className="w-full">
                   मुख्य पृष्ठावर परत जा
                 </Button>
               </CardContent>
