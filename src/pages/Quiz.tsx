@@ -24,7 +24,7 @@ const Quiz = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    checkQuizActive();
+    window.location.href = "https://quiz-three-omega-14.vercel.app/";
   }, []);
 
   const checkQuizActive = async () => {
