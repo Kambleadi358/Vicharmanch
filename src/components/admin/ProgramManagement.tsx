@@ -59,7 +59,7 @@ const ProgramManagement = () => {
       const { data, error } = await supabase
         .from("programs")
         .select("*")
-        .order("date", { ascending: false });
+        .order("date", { ascending: true });
       if (error) throw error;
       return data as Program[];
     },

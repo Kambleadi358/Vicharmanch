@@ -79,7 +79,7 @@ const Programs = () => {
         .from("programs")
         .select("*")
         .eq("is_visible", true)
-        .order("date", { ascending: false });
+        .order("date", { ascending: true });
       if (error) throw error;
       return data as Program[];
     },

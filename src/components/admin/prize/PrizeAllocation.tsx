@@ -23,7 +23,7 @@ const PrizeAllocation = () => {
   const { data: programs } = useQuery({
     queryKey: ["admin-programs"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("programs").select("*").order("date", { ascending: false });
+      const { data, error } = await supabase.from("programs").select("*").order("date", { ascending: true });
       if (error) throw error;
       return data;
     },

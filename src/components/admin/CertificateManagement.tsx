@@ -46,7 +46,7 @@ const CertificateManagement = () => {
         .from("programs")
         .select("*")
         .eq("status", "completed")
-        .order("date", { ascending: false });
+        .order("date", { ascending: true });
       if (error) throw error;
       return data as Program[];
     },
