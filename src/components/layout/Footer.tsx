@@ -116,7 +116,7 @@ const Footer = () => {
               "विचार जिवंत ठेवण्यासाठी"
             </motion.p>
             <p>
-              © सर्व हक्क राखीव – VM@RESET#1956
+              © सर्व हक्क राखीव – 9096465217, 8275956954
               <span className="ml-2 text-[8px] text-primary hover:text-white transition-colors cursor-default select-none" title="Security Hint">
                 VM@RESET#1956
               </span>

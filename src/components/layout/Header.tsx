@@ -10,6 +10,7 @@ const navLinks = [
   { path: "/about", label: "आमच्याबद्दल" },
   { path: "/ideology", label: "विचारधारा" },
   { path: "/programs", label: "कार्यक्रम" },
+  { path: "https://vmseval.vercel.app/competitions", label: "स्पर्धा पहा", isExternal: true },
   { path: "https://quiz-three-omega-14.vercel.app/", label: "प्रश्नमंजुषा", isExternal: true },
   { path: "/accounts", label: "खाते माहिती" },
   { path: "https://vmseval.vercel.app/report", label: "वार्षिक अहवाल", isExternal: true },

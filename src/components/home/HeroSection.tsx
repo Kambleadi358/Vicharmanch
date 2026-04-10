@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { BookOpen, Calendar, Wallet, Download } from "lucide-react";
+import { BookOpen, Calendar, Wallet, Download, Trophy } from "lucide-react";
 import logo from "@/assets/vicharmanch-logo.jpeg";
 
 const HeroSection = () => {
@@ -109,6 +109,15 @@ const HeroSection = () => {
                 <Wallet size={20} />
                 खाते माहिती
               </Link>
+              <a 
+                href="https://vmseval.vercel.app/competitions" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-outline-hero flex items-center gap-2"
+              >
+                <Trophy size={20} />
+                स्पर्धा पहा
+              </a>
             </motion.div>
           </motion.div>
 
